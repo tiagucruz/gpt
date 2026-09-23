@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f3fa" />
+    <title>Órbita — Corrida pelos cristais</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <a class="brand" href="./" aria-label="Órbita, início">
+          <span class="brand-icon" aria-hidden="true">o<span></span></span>
+          <span>órbita<span class="brand-caption">UM PEQUENO MUNDO EM 3D</span></span>
+        </a>
+        <span class="stage"><span class="status-dot"></span>Etapa 09 <span class="stage-label"> /  Completo</span>
+        </span>
+      </header>
+
+      <section id="hud" class="hud" aria-label="Informações da partida">
+        <div class="hud-card">
+          <span class="hud-label">FASE ATUAL</span>
+          <strong id="hud-phase" class="hud-value">1 / 5</strong>
+          <span id="hud-phase-state" class="hud-caption">Em andamento</span>
+        </div>
+        <div id="hud-time-card" class="hud-card hud-time">
+          <span id="hud-time-label" class="hud-label">TEMPO RESTANTE</span>
+          <strong id="hud-time" class="hud-value">00:45</strong>
+          <span class="hud-track" aria-hidden="true"><span id="hud-time-fill"></span></span>
+        </div>
+        <div class="hud-card hud-crystals">
+          <span class="hud-label">CRISTAIS COLETADOS</span>
+          <strong id="hud-items" class="hud-value">0 / 3</strong>
+          <span class="hud-track" aria-hidden="true"><span id="hud-items-fill"></span></span>
+        </div>
+        <p id="hud-announcement" class="sr-only" role="status" aria-atomic="true"></p>
+      </section>
+
+      <section class="intro" aria-labelledby="scene-title">
+        <p class="eyebrow">DO CÓDIGO AO MUNDO</p>
+        <h1 id="scene-title">Cada cristal conta.</h1>
+        <p>Colete os cristais, avance pelas cinco fases e complete sua jornada.</p>
+        <nav class="phase-controls" aria-label="Progresso e controles da partida">
+          <ol id="phase-progress" class="phase-progress" aria-label="Progresso nas cinco fases"></ol>
+          <button id="reload-phase" type="button">Recarregar</button>
+          <button id="toggle-paths" type="button" aria-pressed="false">Ver caminhos</button>
+        </nav>
+      </section>
+
+      <canvas id="scene" aria-label="Cena 3D vista de cima: personagem chibi, cristais verdes e obstáculos coral sobre um piso circular lilás."></canvas>
+      <p id="scene-error" class="error" role="alert" hidden></p>
+      <p id="collision-feedback" class="collision-feedback" role="status" hidden><strong id="result-title"></strong><br><span id="result-description"></span></p>
+
+      <dialog id="completion-dialog" class="completion-dialog" aria-labelledby="completion-title" aria-describedby="completion-description">
+        <span class="completion-symbol" aria-hidden="true">✦</span>
+        <p id="completion-eyebrow" class="eyebrow"></p>
+        <h2 id="completion-title"></h2>
+        <p id="completion-description" class="completion-description"></p>
+        <div class="completion-stats">
+          <div><span>CRISTAIS COLETADOS</span><strong id="completion-crystals"></strong></div>
+          <div><span id="completion-stat-label"></span><strong id="completion-stat-value"></strong></div>
+        </div>
+        <button id="completion-action" type="button" autofocus>Continuar</button>
+        <div class="dialog-audio">
+          <button class="dialog-sound" type="button" data-sound-toggle aria-pressed="true">Efeitos ligados</button>
+          <button class="dialog-sound" type="button" data-music-toggle aria-pressed="true">Música ligada</button>
+        </div>
+      </dialog>
+
+      <footer class="footer">
+        <div class="scene-note"><span class="note-icon" aria-hidden="true">✦</span><div><strong>Explore com WASD ou setas.</strong><p>O tempo pausa ao trocar de aba. Recarregar reinicia a tentativa.</p></div></div>
+        <div class="audio-panel">
+          <div class="sound-controls" role="group" aria-label="Efeitos sonoros">
+            <button type="button" data-sound-toggle aria-pressed="true">Efeitos ligados</button>
+            <label for="sound-volume">Volume</label>
+            <input id="sound-volume" aria-label="Volume dos efeitos sonoros" type="range" min="0" max="100" step="5" value="40" />
+          </div>
+          <div class="sound-controls" role="group" aria-label="Música de fundo">
+            <button type="button" data-music-toggle aria-pressed="true">Música ligada</button>
+            <label for="music-volume">Volume</label>
+            <input id="music-volume" aria-label="Volume da música de fundo" type="range" min="0" max="100" step="5" value="25" />
+          </div>
+        </div>
+      </footer>
+      <div class="bottom-line"><span>LABORATÓRIO CRIATIVO</span><span>THREE.JS · ESTUDO 09 / 09</span></div>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
