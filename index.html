@@ -211,8 +211,8 @@
 <div class="folha">
 
   <header>
-    <p class="disciplina">Escola SENAI "Hessel Horácio Cherkassky"</p>
-    <h1>Inteligência Artificial Generativa Aplicada à programação - ChatGPT</h1>
+    <p class="disciplina">Curso técnico · Desenvolvimento de sistemas</p>
+    <h1>Inteligência Artificial Generativa aplicada à programação</h1>
     <p class="resumo">
       Cada laboratório abaixo é um projeto construído em sala com apoio de IA generativa:
       da definição do prompt até o código publicado e rodando no navegador.
@@ -230,7 +230,8 @@
     ================== COMO ADICIONAR UM NOVO LABORATÓRIO ==================
     1. Copie um bloco <li> inteiro dos que estão abaixo.
     2. Troque o href pelo nome da pasta do novo lab (sempre minúsculo, sem
-       espaços e sem acentos — ex.: "lab-calculadora-ia/").
+       espaços e sem acentos. Atenção: o GitHub Pages diferencia maiúsculas
+       de minúsculas — "3D/" não é o mesmo que "3d/".
     3. Ajuste número, título, descrição e as tecnologias.
     Para liberar um lab que está "Em breve": troque <div class="lab breve">
     por <a class="lab" href="pasta-do-lab/"> e feche com </a>.
@@ -254,14 +255,18 @@
     </li>
 
     <li>
-      <div class="lab breve">
+      <a class="lab" href="3D/">
         <span class="numero">LAB 02</span>
         <span>
-          <span class="titulo">Próximo laboratório</span>
-          <p class="sobre">Publicado assim que a atividade for concluída em aula.</p>
-          <span class="aguarde">Em breve</span>
+          <span class="titulo">Escultura Generativa 3D</span>
+          <p class="sobre">
+            Cena 3D que cria por algoritmo uma escultura de pontos conectados,
+            com rotação contínua e paleta de cores sorteada a cada geração.
+            Cada clique produz uma escultura diferente.
+          </p>
+          <span class="stack"><b>Three.js</b><b>JavaScript</b><b>WebGL</b></span>
         </span>
-      </div>
+      </a>
     </li>
 
     <li>
@@ -280,7 +285,7 @@
   <footer>
     <p>
       Código-fonte de todos os laboratórios disponível no
-      <a href="https://github.com/tiagucruz/Intelig-ncias-Artificiais-Generativas-Aplicada-a-Programa-o---ChatGPT">repositório do curso</a>.
+      <a href="https://github.com/tiagucruz/gpt">repositório do curso</a>.
     </p>
   </footer>
 
