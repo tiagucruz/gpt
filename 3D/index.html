@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f2ec">
+  <meta name="description" content="Um ateliê de arte generativa. Explore formas, transforme o acaso e crie esculturas 3D únicas.">
+  <title>Forma — Ateliê generativo</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3Z"/><path d="m20 2 .6 1.4L22 4l-1.4.6L20 6l-.6-1.4L18 4l1.4-.6L20 2Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1.8 8M4 4v6h6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7V5Z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-mouse" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="6"/><path d="M12 3v6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V4H4v11h4"/></symbol>
+  </defs></svg>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Forma, página inicial"><span class="brand-symbol" aria-hidden="true">✳</span><span>forma<span class="brand-period">.</span></span></a>
+    <span class="brand-description">ATELIÊ DE ARTE GENERATIVA</span>
+    <nav aria-label="Navegação principal"><span class="nav-current"><span></span>Experimente</span><button class="text-button" id="about-button">Sobre o projeto <span aria-hidden="true">↗</span></button></nav>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title"><div><p class="eyebrow"><span class="short-line"></span> ENTRE A MATEMÁTICA E A ARTE</p><h1 id="page-title">O acaso, <em>em forma.</em></h1></div><p class="intro-description">Um conjunto de pontos. Infinitas possibilidades.<br>Explore, transforme e descubra sua próxima escultura.</p></section>
+    <div class="workspace">
+      <aside class="control-panel" aria-label="Controles da escultura">
+        <div class="panel-heading"><h2>Sua composição</h2><span class="tiny-label">01 — ∞</span></div>
+        <fieldset class="style-field"><legend class="control-label">ESTRUTURA</legend><div class="style-options">
+          <label class="style-option"><input type="radio" name="style" value="orbita" checked><svg viewBox="0 0 42 32" aria-hidden="true"><ellipse cx="21" cy="16" rx="16" ry="9" transform="rotate(-30 21 16)"/><ellipse cx="21" cy="16" rx="16" ry="5" transform="rotate(30 21 16)"/></svg><span>Órbita</span></label>
+          <label class="style-option"><input type="radio" name="style" value="espiral"><svg viewBox="0 0 42 32" aria-hidden="true"><path d="M12 27C42 20 1 20 28 12S5 5 19 3M22 29C-4 22 42 19 15 12S37 5 25 2"/></svg><span>Espiral</span></label>
+          <label class="style-option"><input type="radio" name="style" value="esfera"><svg viewBox="0 0 42 32" aria-hidden="true"><circle cx="21" cy="16" r="12"/><ellipse cx="21" cy="16" rx="5" ry="12"/><ellipse cx="21" cy="16" rx="12" ry="5"/></svg><span>Esfera</span></label>
+        </div></fieldset>
+        <div class="slider-control"><label for="density">Quantidade de pontos <output id="density-output" for="density">600</output></label><input id="density" type="range" min="240" max="1080" step="60" value="600"><div class="range-labels"><span>Essencial</span><span>Complexa</span></div></div>
+        <div class="slider-control"><label for="complexity">Distorção <output id="complexity-output" for="complexity">35%</output></label><input id="complexity" type="range" min="0" max="100" value="35"><div class="range-labels"><span>Geométrica</span><span>Orgânica</span></div></div>
+        <div class="slider-control compact"><label for="speed">Velocidade de rotação <output id="speed-output" for="speed">0.6×</output></label><input id="speed" type="range" min="0" max="20" value="6"></div>
+        <div class="palette-section"><div class="control-label palette-label">PALETA GENERATIVA <span id="palette-name">Âmbar solar</span></div><div class="palette-swatches" id="palette-swatches" aria-label="Cores da escultura"></div><p>Uma nova combinação a cada criação.</p></div>
+        <div class="seed-section"><label for="seed" class="control-label">SEMENTE DA CRIAÇÃO <span title="A mesma semente e os mesmos parâmetros recriam a mesma forma.">ⓘ</span></label><div class="seed-input"><span aria-hidden="true">#</span><input id="seed" value="FORMA-0081" maxlength="32" spellcheck="false" aria-describedby="seed-hint"><button id="apply-seed" aria-label="Aplicar semente" title="Aplicar semente"><svg><use href="#i-arrow"/></svg></button></div><span class="sr-only" id="seed-hint">Digite uma semente e pressione Enter para recriar uma composição.</span></div>
+        <button id="generate" class="primary-button"><svg><use href="#i-spark"/></svg>Gerar nova escultura<svg class="button-arrow"><use href="#i-arrow"/></svg></button>
+        <p class="panel-footnote">Criada por código. Descoberta por você.</p>
+      </aside>
+
+      <section class="stage" id="stage" aria-label="Visualização interativa da escultura 3D">
+        <div id="canvas-container"></div>
+        <div class="stage-top"><span class="live-label"><span></span> ARTE EM MOVIMENTO</span><span class="stage-edition" id="edition">EDIÇÃO Nº 001</span></div>
+        <div class="stage-axis" aria-hidden="true"><svg viewBox="0 0 60 60"><path class="axis-y" d="M23 38V8"/><path class="axis-x" d="m23 38 26 12"/><path class="axis-z" d="M23 38 5 50"/><text x="20" y="7">y</text><text x="51" y="54">x</text><text x="0" y="56">z</text><circle cx="23" cy="38" r="2"/></svg></div>
+        <div class="stage-tools"><button id="toggle-rotation" class="stage-button" aria-label="Pausar rotação" title="Pausar rotação" aria-pressed="false"><svg><use href="#i-pause"/></svg></button><button id="reset-camera" class="stage-button" aria-label="Restaurar câmera" title="Restaurar câmera"><svg><use href="#i-reset"/></svg></button><span class="tool-separator"></span><button id="fullscreen" class="stage-button" aria-label="Tela cheia" title="Tela cheia"><svg><use href="#i-expand"/></svg></button></div>
+        <div class="stage-bottom"><div class="artwork-caption"><span class="tiny-label" id="artwork-category">ESTUDO GENERATIVO / 001</span><h2 id="artwork-title">Órbita do acaso<span>®</span></h2><div class="artwork-stats"><span><b id="point-count">600</b> pontos</span><i></i><span><b id="connection-count">1.500</b> conexões</span><i></i><span>Peça única</span></div></div><button id="export" class="export-button"><svg><use href="#i-download"/></svg>Salvar imagem<span>PNG</span></button></div>
+        <div class="loading" id="loading"><span class="loading-symbol">✳</span><p>Encontrando forma no acaso…</p></div>
+        <div class="stage-error" id="stage-error" hidden><h2>Vamos dar forma à sua ideia.</h2><p id="error-message"></p></div>
+      </section>
+    </div>
+    <div class="below-stage"><span class="made-with"><span></span> ALGORITMO + ACASO + VOCÊ</span><p><svg><use href="#i-mouse"/></svg>Arraste para explorar <span>·</span> Role para aproximar <span>·</span> Toque para interagir</p></div>
+
+    <section class="explorations" aria-labelledby="explore-title"><div class="explore-heading"><div><span class="eyebrow">OUTROS CAMINHOS</span><h2 id="explore-title">Toda forma começa com uma ideia.</h2></div><p>Escolha um ponto de partida <span aria-hidden="true">↙</span></p></div><div class="preset-grid">
+      <button class="preset-card" data-preset="orbita"><div class="preset-art" id="preview-orbita" aria-hidden="true"></div><div class="preset-copy"><span class="tiny-label">01 / EQUILÍBRIO</span><h3>Órbita do acaso</h3><p>Conexões que encontram seu centro.</p></div><span class="preset-arrow" aria-hidden="true">↗</span></button>
+      <button class="preset-card" data-preset="espiral"><div class="preset-art" id="preview-espiral" aria-hidden="true"></div><div class="preset-copy"><span class="tiny-label">02 / MOVIMENTO</span><h3>Fluxo infinito</h3><p>O ritmo de uma forma que se expande.</p></div><span class="preset-arrow" aria-hidden="true">↗</span></button>
+      <button class="preset-card" data-preset="esfera"><div class="preset-art" id="preview-esfera" aria-hidden="true"></div><div class="preset-copy"><span class="tiny-label">03 / CONEXÃO</span><h3>Pequeno universo</h3><p>Um mundo inteiro entre dois pontos.</p></div><span class="preset-arrow" aria-hidden="true">↗</span></button>
+    </div></section>
+  </main>
+  <footer><a class="footer-brand" href="./">forma.</a><span>Um experimento em arte, código e possibilidades.</span><span>FEITO PARA EXPLORAR <span aria-hidden="true">↗</span></span></footer>
+  <div id="toast" class="toast" role="status"></div>
+  <dialog id="about-dialog"><button id="close-about" class="dialog-close" aria-label="Fechar"><svg><use href="#i-close"/></svg></button><span class="eyebrow">SOBRE O EXPERIMENTO</span><h2>Onde o código<br>encontra o <em>acaso.</em></h2><p>Forma é um ateliê de esculturas generativas desenvolvido para a atividade de Arte Generativa 3D do SENAI.</p><p>Cada peça nasce de uma superfície matemática. Pontos se distribuem por órbitas, espirais ou esferas, recebem pequenas distorções e se conectam aos seus vizinhos. A semente define as variações e uma paleta de cores exclusiva.</p><div class="about-grid"><div><b>01</b><span>Escolha uma estrutura e explore os parâmetros.</span></div><div><b>02</b><span>Gere uma nova escultura ou recrie uma semente.</span></div><div><b>03</b><span>Encontre seu ângulo e salve uma imagem.</span></div></div><p class="about-note">Construído com Three.js. Todas as formas são calculadas em tempo real, no seu navegador. Nenhuma criação é enviada a um servidor.</p></dialog>
+  <script>if(location.protocol==='file:'){document.getElementById('loading').hidden=true;document.getElementById('stage-error').hidden=false;document.getElementById('error-message').textContent='Abra este projeto com o Live Server do VS Code. Os módulos 3D precisam de um servidor local para funcionar.';}</script>
+</body>
+</html>
